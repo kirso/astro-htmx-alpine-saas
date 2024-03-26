@@ -1,0 +1,22 @@
+---
+import PocketBase from "pocketbase";
+
+import LayoutApp from "@layouts/LayoutApp";
+
+const pb = new PocketBase("http://127.0.0.1:8090");
+
+const projects = await pb.collection("projects").getFullList();
+import ProjectCard from "@components/app/projects/ProjectCard";
+---
+
+<LayoutApp title="Dashboard">
+  <ul>
+    {
+      projects.map((project) => (
+        <>
+          <ProjectCard project={project} />
+        </>
+      ))
+    }
+  </ul>
+</LayoutApp>
